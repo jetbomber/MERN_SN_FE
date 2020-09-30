@@ -14,14 +14,14 @@ class FollowProfileButton extends Component {
         {!this.props.following ? (
           <button
             onClick={this.followClick}
-            className="btn btn-success btn-raised mr-5"
+            className="btn btn-primary btn-raised mr-5"
           >
             Follow
           </button>
         ) : (
           <button
             onClick={this.unfollowClick}
-            className="btn btn-warning btn-raised"
+            className="btn btn-secondary btn-raised"
           >
             UnFollow
           </button>

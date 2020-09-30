@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { singlePost, update } from "./apiPost";
 import { isAuthenticated } from "../auth";
 import { Redirect } from "react-router-dom";
-import DefaultPost from "../images/mountains.jpg";
+import DefaultPost from "../images/post.jpg";
 
 class EditPost extends Component {
   constructor() {
@@ -117,7 +117,10 @@ class EditPost extends Component {
         />
       </div>
 
-      <button onClick={this.clickSubmit} className="btn btn-raised btn-primary">
+      <button
+        onClick={this.clickSubmit}
+        className="btn btn-raised btn-primary btn-sm"
+      >
         Update Post
       </button>
     </form>

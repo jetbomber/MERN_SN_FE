@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { list } from "./apiPost";
-import DefaultPost from "../images/mountains.jpg";
+import DefaultPost from "../images/post.jpg";
 import { Link } from "react-router-dom";
+import Pagination from "react-js-pagination";
 
 class Posts extends Component {
   constructor() {
@@ -9,6 +10,10 @@ class Posts extends Component {
     this.state = {
       posts: [],
       page: 1,
+      totalItems: 1,
+      itemsPerPage: 1,
+      itemClass: "page-item",
+      linkClass: "page-link",
     };
   }
 
@@ -17,7 +22,12 @@ class Posts extends Component {
       if (data.error) {
         console.log(data.error);
       } else {
-        this.setState({ posts: data });
+        this.setState({
+          totalItems: data.totalItems,
+          itemsPerPage: data.perPage,
+          posts: data.posts,
+        });
+        console.log(this.state.posts.length);
       }
     });
   };
@@ -26,15 +36,11 @@ class Posts extends Component {
     this.loadPosts(this.state.page);
   }
 
-  loadMore = (number) => {
-    this.setState({ page: this.state.page + number });
-    this.loadPosts(this.state.page + number);
-  };
-
-  loadLess = (number) => {
-    this.setState({ page: this.state.page - number });
-    this.loadPosts(this.state.page - number);
-  };
+  handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({ page: pageNumber });
+    this.loadPosts(pageNumber);
+  }
 
   renderPosts = (posts) => {
     return (
@@ -44,31 +50,38 @@ class Posts extends Component {
           const posterName = post.postedBy ? post.postedBy.name : " Unknown";
 
           return (
-            <div className="card col-md-4" key={i}>
-              <div className="card-body">
+            <div className="col-md-4" key={i}>
+              <div className="card mb-4 box-shadow" style={{ height: "520px" }}>
                 <img
                   src={`${process.env.REACT_APP_API_URL}/post/photo/${post._id}`}
                   alt={post.title}
                   onError={(i) => (i.target.src = `${DefaultPost}`)}
-                  className="img-thunbnail mb-3"
+                  className="card-img-top"
                   style={{ height: "200px", width: "100%" }}
                 />
-                <h5 className="card-title">{post.title}</h5>
-                <p className="card-text">{post.body.substring(0, 100)}</p>
-                <br />
-                <p className="font-italic mark">
-                  Posted by{" "}
-                  <Link to={`${posterId}`}>
-                    {posterName} {""}{" "}
-                  </Link>
-                  on {new Date(post.created).toDateString()}
-                </p>
-                <Link
-                  to={`/post/${post._id}`}
-                  className="btn btn-raised btn-primary btn-sm"
-                >
-                  Read more
-                </Link>
+
+                <div className="card-body">
+                  <h5 className="card-title">{post.title}</h5>
+                  <p className="card-text">{post.body.substring(0, 100)}</p>
+                  <small className="text-muted mark">
+                    {" "}
+                    Posted by{" "}
+                    <Link to={`${posterId}`}>
+                      {posterName} {""}{" "}
+                    </Link>
+                    on {new Date(post.created).toDateString()}
+                  </small>
+                  <div className="d-flex justify-content-between align-items-center mt-2">
+                    <div className="btn-group">
+                      <Link
+                        to={`/post/${post._id}`}
+                        className="btn btn-raised btn-secondary btn-sm"
+                      >
+                        Read more
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           );
@@ -78,33 +91,24 @@ class Posts extends Component {
   };
 
   render() {
-    const { posts, page } = this.state;
+    const { posts, page, totalItems, itemsPerPage } = this.state;
     return (
       <div className="container">
-        <h2 className="mt-5 mb-5">
-          {!posts.length ? "Loading..." : "Recent Posts"}
+        <h2 className="mt-5 mb-5 lh-125 border-bottom border-gray">
+          {!posts.length ? "Loading..." : "Posts"}
         </h2>
         {this.renderPosts(posts)}
-        {page > 1 ? (
-          <button
-            className="btn btn-raised btn-warning mr-5 mt-5 mb-5"
-            onClick={() => this.loadLess(1)}
-          >
-            Previous ({this.state.page - 1})
-          </button>
-        ) : (
-          ""
-        )}
-
-        {posts.length ? (
-          <button
-            className="btn btn-raised btn-success mt-5 mb-5"
-            onClick={() => this.loadMore(1)}
-          >
-            Next ({page + 1})
-          </button>
-        ) : (
-          ""
+        {totalItems > itemsPerPage && (
+          <div>
+            <Pagination
+              activePage={page}
+              itemsCountPerPage={itemsPerPage}
+              totalItemsCount={totalItems}
+              itemClass={this.state.itemClass}
+              linkClass={this.state.linkClass}
+              onChange={this.handlePageChange.bind(this)}
+            />
+          </div>
         )}
       </div>
     );

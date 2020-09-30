@@ -112,7 +112,10 @@ class Signin extends Component {
           className="form-control"
         />
       </div>
-      <button onClick={this.clickSubmit} className="btn btn-raised btn-primary">
+      <button
+        onClick={this.clickSubmit}
+        className="btn btn-raised btn-primary btn-sm"
+      >
         Submit
       </button>
     </form>
@@ -134,7 +137,7 @@ class Signin extends Component {
 
     return (
       <div className="container">
-        <h2 className="mt-5 mb-5">Sign In</h2>
+        <h2 className="mt-5 mb-5 lh-125 border-bottom border-gray">Sign In</h2>
         <hr />
         <SocialLogin />
         <hr />

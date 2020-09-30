@@ -1,0 +1,24 @@
+$theme-colors: (
+  "primary": #4484ce,
+  "secondary": #d9d9d9,
+  "danger": #f19f4d,
+);
+
+.red-text {
+  color: #f44336;
+}
+
+.nav-link {
+  text-transform: uppercase;
+}
+
+.btn {
+  text-transform: uppercase;
+}
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+@import "../node_modules/bootstrap/scss/bootstrap";

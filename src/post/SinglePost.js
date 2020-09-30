@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { singlePost, remove, like, unlike } from "./apiPost";
-import DefaultPost from "../images/mountains.jpg";
+import DefaultPost from "../images/post.jpg";
 import { Link, Redirect } from "react-router-dom";
 import { isAuthenticated } from "../auth";
 import Comment from "./Comment";
@@ -88,7 +88,7 @@ class SinglePost extends Component {
     const posterName = post.postedBy ? post.postedBy.name : " Unknown";
     const { like, likes } = this.state;
     return (
-      <div className="card-body">
+      <div className="my-3 p-3 bg-white rounded box-shadow">
         <img
           src={`${process.env.REACT_APP_API_URL}/post/photo/${
             post._id
@@ -96,7 +96,7 @@ class SinglePost extends Component {
           alt={post.title}
           onError={(i) => (i.target.src = `${DefaultPost}`)}
           className="img-thunbnail mb-3"
-          style={{ height: "300px", width: "100%", objectFit: "cover" }}
+          style={{ height: "200px", width: "auto" }}
         />
 
         {like ? (
@@ -110,7 +110,7 @@ class SinglePost extends Component {
         ) : (
           <h3 onClick={this.likeToggle}>
             <i
-              className="fa fa-thumbs-up text-warning bg-dark"
+              className="fa fa-thumbs-up red-text bg-dark"
               style={{ padding: "10px", borderRadius: "50%" }}
             />{" "}
             {likes} Like
@@ -135,13 +135,13 @@ class SinglePost extends Component {
             <>
               <Link
                 to={`/post/edit/${post._id}`}
-                className="btn btn-raised btn-warning btn-sm mr-5"
+                className="btn btn-raised btn-secondary btn-sm mr-5"
               >
                 Update Post
               </Link>
               <button
                 onClick={this.deleteConfirmed}
-                className="btn btn-raised btn-danger mr-5"
+                className="btn btn-raised btn-danger btn-sm mr-5"
               >
                 Delete Post
               </button>
@@ -152,16 +152,16 @@ class SinglePost extends Component {
             <div class="card mt-5">
               <div className="card-body">
                 <h5 className="card-title">Admin</h5>
-                <p className="mb-2 text-danger">Edit/Delete as an Admin</p>
+                <p className="mb-2 red-text">Edit/Delete as an Admin</p>
                 <Link
                   to={`/post/edit/${post._id}`}
-                  className="btn btn-raised btn-warning btn-sm mr-5"
+                  className="btn btn-raised btn-secondary btn-sm mr-5"
                 >
                   Update Post
                 </Link>
                 <button
                   onClick={this.deleteConfirmed}
-                  className="btn btn-raised btn-danger"
+                  className="btn btn-raised btn-danger btn-sm"
                 >
                   Delete Post
                 </button>
@@ -182,7 +182,9 @@ class SinglePost extends Component {
     }
     return (
       <div className="container">
-        <h2 className="display-2 mt-5 mb-5">{post.title} </h2>
+        <h2 className="mt-5 mb-5 lh-125 border-bottom border-gray">
+          {post.title}
+        </h2>
 
         {!post ? (
           <div className="jumbotron text-center">

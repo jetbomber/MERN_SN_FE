@@ -76,8 +76,8 @@ class Comment extends Component {
     const { comments } = this.props;
     const { error } = this.state;
     return (
-      <div>
-        <h2 className="mt-5 mb-5">Leave a Comment</h2>
+      <div className="my-3 p-3 bg-white rounded box-shadow">
+        <h2>Leave a Comment</h2>
         <form onSubmit={this.addComment}>
           <div className="form-group">
             <input
@@ -87,7 +87,9 @@ class Comment extends Component {
               value={this.state.text}
               placeholder="Leave a comment"
             />
-            <button className="btn btn-raised btn-success mt-2">Post</button>
+            <button className="btn btn-raised btn-secondary btn-sm mt-2">
+              Post
+            </button>
           </div>
         </form>
 
@@ -99,7 +101,9 @@ class Comment extends Component {
         </div>
 
         <div className="col-md-12">
-          <h3 className="text-primary">{comments.length} Comments</h3>
+          <h3 className="text-primary">
+            {comments.length} {comments.length === 1 ? "Comment" : "Comments"}
+          </h3>
           <hr />
           {comments.map((comment, i) => (
             <div key={i}>

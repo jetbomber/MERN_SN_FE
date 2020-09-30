@@ -84,7 +84,7 @@ class Profile extends Component {
 
     return (
       <div className="container">
-        <h2 className="mt-5 mb-5">Profile</h2>
+        <h2 className="mt-5 mb-5 lh-125 border-bottom border-gray">Profile</h2>
         <div className="row">
           <div className="col-md-4">
             <img
@@ -106,14 +106,14 @@ class Profile extends Component {
             isAuthenticated().user._id === user._id ? (
               <div className="d-inline-block">
                 <Link
-                  className="btn btn-raised btn-info mr-5"
+                  className="btn btn-raised btn-primary btn-sm mr-5"
                   to={`/post/create`}
                 >
                   Create Post
                 </Link>
 
                 <Link
-                  className="btn btn-raised btn-success mr-5"
+                  className="btn btn-raised btn-secondary btn-sm mr-5"
                   to={`/user/edit/${user._id}`}
                 >
                   Edit Profile
@@ -133,11 +133,9 @@ class Profile extends Component {
                   <div class="card mt-5">
                     <div className="card-body">
                       <h5 className="card-title">Admin</h5>
-                      <p className="mb-2 text-danger">
-                        Edit/Delete as an Admin
-                      </p>
+                      <p className="mb-2 red-text">Edit/Delete as an Admin</p>
                       <Link
-                        className="btn btn-raised btn-success mr-5"
+                        className="btn btn-raised btn-secondary btn-sm mr-5"
                         to={`/user/edit/${user._id}`}
                       >
                         Edit Profile

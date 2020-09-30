@@ -6,7 +6,7 @@ class ProfileTabs extends Component {
   render() {
     const { following, followers, posts } = this.props;
     return (
-      <div>
+      <div className="my-3 p-3 bg-white rounded box-shadow">
         <div className="row">
           <div className="col-md-4">
             <h3 className="text-primary">Followers</h3>

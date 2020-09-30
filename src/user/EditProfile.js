@@ -149,7 +149,10 @@ class EditProfile extends Component {
           value={password}
         />
       </div>
-      <button onClick={this.clickSubmit} className="btn btn-raised btn-primary">
+      <button
+        onClick={this.clickSubmit}
+        className="btn btn-raised btn-primary btn-sm"
+      >
         Update
       </button>
     </form>
@@ -179,7 +182,9 @@ class EditProfile extends Component {
 
     return (
       <div className="container">
-        <h2 className="mt-5 mb-5">Edit Profile</h2>
+        <h2 className="mt-5 mb-5 lh-125 border-bottom border-gray">
+          Edit Profile
+        </h2>
         <div
           className="alert alert-danger"
           style={{ display: error ? "" : "none" }}
@@ -203,10 +208,9 @@ class EditProfile extends Component {
           alt={name}
         />
 
-        {this.updateForm(name, email, password, about)}
-        {isAuthenticated().user.role === "admin" ||
-          (isAuthenticated().user._id === id &&
-            this.signupForm(name, email, password, about))}
+        {(isAuthenticated().user.role === "admin" ||
+          isAuthenticated().user._id === id) &&
+          this.updateForm(name, email, password, about)}
       </div>
     );
   }

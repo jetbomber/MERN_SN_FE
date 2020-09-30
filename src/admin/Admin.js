@@ -20,19 +20,17 @@ class Admin extends Component {
     }
     return (
       <div>
-        <div className="jumbotron">
-          <h2>Admin Dashboard</h2>
+        <div className="container">
+          <h2 className="mt-5 mb-5 lh-125 border-bottom border-gray">
+            Admin Dashboard
+          </h2>
         </div>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-6">
-              <h2>Posts</h2>
-              <hr />
               <Posts />
             </div>
             <div className="col-md-6">
-              <h2>Users</h2>
-              <hr />
               <Users />
             </div>
           </div>
