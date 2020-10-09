@@ -104,14 +104,15 @@ class EditProfile extends Component {
 
   updateForm = (name, email, password, about) => (
     <form>
-      <div className="form-group">
-        <label className="text-muted">Profile Photo</label>
+      <div className="custom-file">
         <input
+          id="customFile"
           onChange={this.handleChange("photo")}
           type="file"
           accept="image/*"
-          className="form-control"
+          className="custom-file-input"
         />
+        <label className="custom-file-label">Profile Photo</label>
       </div>
       <div className="form-group">
         <label className="text-muted">Name</label>

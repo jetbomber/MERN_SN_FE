@@ -85,8 +85,8 @@ class Profile extends Component {
     return (
       <div className="container">
         <h2 className="mt-5 mb-5 lh-125 border-bottom border-gray">Profile</h2>
-        <div className="row">
-          <div className="col-md-4">
+        <div class="row">
+          <div class="col-md-4">
             <img
               style={{ height: "200px", width: "auto" }}
               className="img-thumbnail"
@@ -95,25 +95,25 @@ class Profile extends Component {
               alt={user.name}
             />
           </div>
-          <div className="col-md-8">
-            <div className="lead mt-2">
-              <p>Hello {user.name}</p>
-              <p>Email: {user.email}</p>
-              <p>{`Joined ${new Date(user.created).toDateString()}`}</p>
-            </div>
-
+          <div class="col-md-4">
+            <p className="card-text">{user.name}</p>
+            <p className="card-text">Email: {user.email}</p>
+            <p className="card-text">{`Joined: ${new Date(
+              user.created
+            ).toDateString()}`}</p>
+            <br />
             {isAuthenticated().user &&
             isAuthenticated().user._id === user._id ? (
               <div className="d-inline-block">
                 <Link
-                  className="btn btn-raised btn-primary btn-sm mr-5"
+                  className="btn btn-raised btn-primary btn-sm mr-2"
                   to={`/post/create`}
                 >
                   Create Post
                 </Link>
 
                 <Link
-                  className="btn btn-raised btn-secondary btn-sm mr-5"
+                  className="btn btn-raised btn-secondary btn-sm mr-2"
                   to={`/user/edit/${user._id}`}
                 >
                   Edit Profile
@@ -126,32 +126,28 @@ class Profile extends Component {
                 onButtonClick={this.clickFollowButton}
               />
             )}
-
-            <div>
-              {isAuthenticated().user &&
-                isAuthenticated().user.role === "admin" && (
-                  <div class="card mt-5">
-                    <div className="card-body">
-                      <h5 className="card-title">Admin</h5>
-                      <p className="mb-2 red-text">Edit/Delete as an Admin</p>
-                      <Link
-                        className="btn btn-raised btn-secondary btn-sm mr-5"
-                        to={`/user/edit/${user._id}`}
-                      >
-                        Edit Profile
-                      </Link>
-                      <DeleteUser userId={user._id} />
-                    </div>
-                  </div>
-                )}
-            </div>
+          </div>
+          <div class="col-md-4">
+            {isAuthenticated().user &&
+              isAuthenticated().user.role === "admin" &&
+              isAuthenticated().user._id !== user._id && (
+                <div>
+                  <Link
+                    className="btn btn-raised btn-secondary btn-sm mr-2"
+                    to={`/user/edit/${user._id}`}
+                  >
+                    Edit Profile
+                  </Link>
+                  <DeleteUser userId={user._id} />
+                </div>
+              )}
           </div>
         </div>
 
         <div className="row">
           <div className="col md-12 mt-5 mb-5">
             <hr />
-            <p className="lead">{user.about}</p>
+            <p className="card-text">{user.about}</p>
             <hr />
             <ProfileTabs
               followers={user.followers}

@@ -148,7 +148,7 @@ class FindPeople extends Component {
         </h2>
         {open && (
           <div className="alert alert-success">
-            <p>{followMessage}</p>
+            <p className="card-text">{followMessage}</p>
           </div>
         )}
         {this.renderUsers(users)}

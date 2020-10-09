@@ -61,7 +61,7 @@ class Users extends Component {
           </p>
           <Link
             to={`/user/${user._id}`}
-            className="btn btn-raised btn-secondary btn-sm"
+            className="btn btn-raised btn-primary btn-sm"
           >
             View Profile
           </Link>

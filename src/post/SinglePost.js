@@ -89,85 +89,103 @@ class SinglePost extends Component {
     const { like, likes } = this.state;
     return (
       <div className="my-3 p-3 bg-white rounded box-shadow">
-        <img
-          src={`${process.env.REACT_APP_API_URL}/post/photo/${
-            post._id
-          }?${new Date().getTime()}`}
-          alt={post.title}
-          onError={(i) => (i.target.src = `${DefaultPost}`)}
-          className="img-thunbnail mb-3"
-          style={{ height: "200px", width: "auto" }}
-        />
-
-        {like ? (
-          <h3 onClick={this.likeToggle}>
-            <i
-              className="fa fa-thumbs-up text-success bg-dark"
-              style={{ padding: "10px", borderRadius: "50%" }}
-            />{" "}
-            {likes} Like
-          </h3>
-        ) : (
-          <h3 onClick={this.likeToggle}>
-            <i
-              className="fa fa-thumbs-up red-text bg-dark"
-              style={{ padding: "10px", borderRadius: "50%" }}
-            />{" "}
-            {likes} Like
-          </h3>
-        )}
-
-        <p className="card-text">{post.body}</p>
-        <br />
-        <p className="font-italic mark">
-          Posted by{" "}
-          <Link to={`${posterId}`}>
-            {posterName} {""}{" "}
-          </Link>
-          on {new Date(post.created).toDateString()}
-        </p>
-        <Link to={`/`} className="btn btn-raised btn-primary btn-sm mr-5">
-          Back to Posts
-        </Link>
-
-        {isAuthenticated().user &&
-          isAuthenticated().user._id === post.postedBy._id && (
-            <>
-              <Link
-                to={`/post/edit/${post._id}`}
-                className="btn btn-raised btn-secondary btn-sm mr-5"
-              >
-                Update Post
-              </Link>
-              <button
-                onClick={this.deleteConfirmed}
-                className="btn btn-raised btn-danger btn-sm mr-5"
-              >
-                Delete Post
-              </button>
-            </>
-          )}
-        <div>
-          {isAuthenticated().user && isAuthenticated().user.role === "admin" && (
-            <div class="card mt-5">
-              <div className="card-body">
-                <h5 className="card-title">Admin</h5>
-                <p className="mb-2 red-text">Edit/Delete as an Admin</p>
-                <Link
-                  to={`/post/edit/${post._id}`}
-                  className="btn btn-raised btn-secondary btn-sm mr-5"
-                >
-                  Update Post
-                </Link>
-                <button
-                  onClick={this.deleteConfirmed}
-                  className="btn btn-raised btn-danger btn-sm"
-                >
-                  Delete Post
-                </button>
+        <div className="row">
+          <div className="col-md-4">
+            <img
+              src={`${process.env.REACT_APP_API_URL}/post/photo/${
+                post._id
+              }?${new Date().getTime()}`}
+              alt={post.title}
+              onError={(i) => (i.target.src = `${DefaultPost}`)}
+              className="img-fluid mb-3"
+              style={{ height: "200px", width: "auto" }}
+            />
+          </div>
+          <div className="col-md-8">
+            <div className="row">
+              <p className="card-text">{post.body}</p>
+            </div>
+            <br />
+            <div className="row mark">
+              <div className="col-md-8 d-flex align-items-center">
+                <p className="font-italic">
+                  Posted by{" "}
+                  <Link to={`${posterId}`}>
+                    {posterName} {""}{" "}
+                  </Link>
+                  on {new Date(post.created).toDateString()}
+                </p>
+              </div>
+              <div className="col-md-4">
+                {like ? (
+                  <h5 onClick={this.likeToggle}>
+                    <i
+                      className="fa fa-thumbs-up text-success bg-dark"
+                      style={{ padding: "5px", borderRadius: "50%" }}
+                    />{" "}
+                    {likes} Like
+                  </h5>
+                ) : (
+                  <h5 onClick={this.likeToggle}>
+                    <i
+                      className="fa fa-thumbs-up red-text bg-dark"
+                      style={{ padding: "5px", borderRadius: "50%" }}
+                    />{" "}
+                    {likes} Like
+                  </h5>
+                )}
               </div>
             </div>
-          )}
+            <br />
+            <div class="row">
+              <div class="col-md-6">
+                {" "}
+                <Link
+                  to={`/`}
+                  className="btn btn-raised btn-primary btn-sm mr-2"
+                >
+                  Back to Posts
+                </Link>
+                {isAuthenticated().user &&
+                  isAuthenticated().user._id === post.postedBy._id && (
+                    <>
+                      <Link
+                        to={`/post/edit/${post._id}`}
+                        className="btn btn-raised btn-secondary btn-sm mr-2"
+                      >
+                        Update Post
+                      </Link>
+                      <button
+                        onClick={this.deleteConfirmed}
+                        className="btn btn-raised btn-danger btn-sm"
+                      >
+                        Delete Post
+                      </button>
+                    </>
+                  )}
+              </div>
+              <div class="col-md-6">
+                {isAuthenticated().user &&
+                  isAuthenticated().user.role === "admin" &&
+                  isAuthenticated().user._id !== post.postedBy._id && (
+                    <div>
+                      <Link
+                        to={`/post/edit/${post._id}`}
+                        className="btn btn-raised btn-secondary btn-sm mr-2"
+                      >
+                        Update Post
+                      </Link>
+                      <button
+                        onClick={this.deleteConfirmed}
+                        className="btn btn-raised btn-danger btn-sm"
+                      >
+                        Delete Post
+                      </button>
+                    </div>
+                  )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -181,7 +199,7 @@ class SinglePost extends Component {
       return <Redirect to={`/signin`} />;
     }
     return (
-      <div className="container">
+      <main className="container">
         <h2 className="mt-5 mb-5 lh-125 border-bottom border-gray">
           {post.title}
         </h2>
@@ -199,7 +217,7 @@ class SinglePost extends Component {
           comments={comments.reverse()}
           updateComments={this.updateComments}
         />
-      </div>
+      </main>
     );
   }
 }

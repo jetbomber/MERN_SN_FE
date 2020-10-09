@@ -1,8 +1,43 @@
+@charset "UTF-8";
 $theme-colors: (
   "primary": #4484ce,
-  "secondary": #d9d9d9,
+  "secondary": #5a6268,
   "danger": #f19f4d,
 );
+
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+  box-shadow: none;
+}
+.btn-secondary:hover {
+  color: #fff;
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+.btn-secondary.focus,
+.btn-secondary:focus {
+  box-shadow: none, 0 0 0 0.2rem hsla(208, 7%, 46%, 0.5);
+}
+.btn-secondary.disabled,
+.btn-secondary:disabled {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+.btn-secondary:not(:disabled):not(.disabled).active,
+.btn-secondary:not(:disabled):not(.disabled):active,
+.show > .btn-secondary.dropdown-toggle {
+  color: #fff;
+  background-color: #545b62;
+  border-color: #4e555b;
+}
+.btn-secondary:not(:disabled):not(.disabled).active:focus,
+.btn-secondary:not(:disabled):not(.disabled):active:focus,
+.show > .btn-secondary.dropdown-toggle:focus {
+  box-shadow: none, 0 0 0 0.2rem hsla(208, 7%, 46%, 0.5);
+}
 
 .red-text {
   color: #f44336;

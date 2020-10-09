@@ -87,14 +87,15 @@ class EditPost extends Component {
 
   editPostForm = (title, body) => (
     <form>
-      <div className="form-group">
-        <label className="text-muted">Post Photo</label>
+      <div className="custom-file">
         <input
+          id="customFile"
           onChange={this.handleChange("photo")}
           type="file"
           accept="image/*"
-          className="form-control"
+          className="custom-file-input"
         />
+        <label className="custom-file-label">Post Photo</label>
       </div>
       <div className="form-group">
         <label className="text-muted">Title</label>
@@ -135,7 +136,7 @@ class EditPost extends Component {
 
     return (
       <div className="container">
-        <h2 className="mt-5 mb-5">{title}</h2>
+        <h2 className="mt-5 mb-5 lh-125 border-bottom border-gray">{title}</h2>
 
         <div
           className="alert alert-danger"
